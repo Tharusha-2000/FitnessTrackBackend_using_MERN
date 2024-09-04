@@ -28,7 +28,7 @@ app.use((err, req, res, next) => {
 
 app.get("/", async (req, res) => {
   res.status(200).json({
-    message: "Hello developers from GFG",
+    message: "Hello developers ",
   });
 });
 
@@ -36,7 +36,7 @@ var mongoURL = 'mongodb+srv://dinukgunasekara286:Bzt3SrJYtm5htN4H@fitnessdb.w1xu
 
 
 const connectDB = () => {
-  mongoose.set("strictQuery", true);
+   mongoose.set("strictQuery", true);
   mongoose
     .connect(process.env.MONGODB_URL|| mongoURL)
     .then(() => console.log("Connected to Mongo DB"))
@@ -49,8 +49,9 @@ const connectDB = () => {
 
 const startServer = async () => {
   try {
+
     connectDB();
-    app.listen(8010, () => console.log("Server started on port 8010"));
+    app.listen(8002, () => console.log("Server started on port 8110"));
   } catch (error) {
     console.log(error);
   }

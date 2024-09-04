@@ -1,5 +1,6 @@
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
 import dotenv from "dotenv";
 import { createError } from "../error.js";
 import User from "../models/User.js";
@@ -27,8 +28,8 @@ export const UserRegister = async (req, res, next) => {
       img,
     });
     const createdUser = await user.save();
-    const token = jwt.sign({ id: createdUser._id }, process.env.JWT, {
-      expiresIn: "9999 years",
+    const token = jwt.sign({ id: createdUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "99 years",
     });
     return res.status(200).json({ token, user });
   } catch (error) {
@@ -51,11 +52,13 @@ export const UserLogin = async (req, res, next) => {
     if (!isPasswordCorrect) {
       return next(createError(403, "Incorrect password"));
     }
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT, {
-      expiresIn: "9999 years",
+    
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "99 years",
     });
-
+ 
+    
+    console.log(token);
     return res.status(200).json({ token, user });
   } catch (error) {
     return next(error);
@@ -64,7 +67,9 @@ export const UserLogin = async (req, res, next) => {
 
 export const getUserDashboard = async (req, res, next) => {
   try {
+    console.log(req.user);
     const userId = req.user?.id;
+    console.log(userId);
     const user = await User.findById(userId);
     if (!user) {
       return next(createError(404, "User not found"));
