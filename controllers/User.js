@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-
+import nodemailer from 'nodemailer';
 import dotenv from "dotenv";
 import { createError } from "../error.js";
 import User from "../models/User.js";
@@ -36,6 +36,7 @@ export const UserRegister = async (req, res, next) => {
     return next(error);
   }
 };
+
 
 export const UserLogin = async (req, res, next) => {
   try {
@@ -289,6 +290,59 @@ export const addWorkout = async (req, res, next) => {
   }
 };
 
+
+export const contact =async (req, res) => {
+  
+  try {
+    console.log(req.user);
+    const userId = req.user.id;
+    const user = await User.findById(userId);
+
+    const { from_name, subject, message } = req.body;
+    console.log(user.email);
+    console.log(from_name,subject,message);  
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+       // port: 534,
+        auth: {
+          user: "zionlogy99x@gmail.com",
+          pass: "cjgejcxddkvuodor",
+        }
+      });
+      
+      var mailOptions = {
+        from: user.email,
+        to:  "zionlogy99x@gmail.com",
+        subject: subject,
+        html: `
+        <h1>${subject}</h1>
+        <p><strong>Message from:</strong> ${from_name}</p>
+        <p><strong>Message:</strong> ${message}</p>
+      `
+      };
+      
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.status(201).json({ msg: "User send email successfully", success: true});
+        }
+      });
+      
+     
+    }catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+ 
+};
+
+
+
+
+
+
 // Function to parse workout details from a line
 const parseWorkoutLine = (parts) => {
   const details = {};
@@ -305,7 +359,10 @@ const parseWorkoutLine = (parts) => {
     return details;
   }
   return null;
+
 };
+
+
 
 // Function to calculate calories burnt for a workout
 const calculateCaloriesBurnt = (workoutDetails) => {
@@ -314,3 +371,7 @@ const calculateCaloriesBurnt = (workoutDetails) => {
   const caloriesBurntPerMinute = 5; // Sample value, actual calculation may vary
   return durationInMinutes * caloriesBurntPerMinute * weightInKg;
 };
+
+
+
+
