@@ -1,21 +1,22 @@
 import express from "express";
-import * as dotenv from "dotenv";
+import { config } from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./routes/User.js";
 
-dotenv.config();
+config();
 
 const app = express();
-const corsOptions = {
-  origin: 'https://fitness-track-frontend-using-mern-sjxhsavyv.vercel.app/',  // Allow your frontend URL
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',  // Allowable methods
-  credentials: true,  // If you need cookies or authentication headers
-  preflightContinue: false,
-  optionsSuccessStatus: 204
-};
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); 
+app.use(cors({
+    origin: ["https://fitness-track-frontend-using-mern.vercel.app"],
+    methods: ['GET','POST','PUT',"DELETE"],
+    credentials: true
+}))
+app.set('view engine', 'ejs');
+app.use(morgan('tiny'));
+app.use(express.json());
+app.use(cookieParser());
+
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true })); // for form data
 
