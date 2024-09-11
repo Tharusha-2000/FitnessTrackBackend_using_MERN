@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: 'https://fitness-track-frontend-using-mern-zjgw.vercel.app',  // Allow your frontend URL
+  origin: 'https://fitness-track-frontend-using-mern-sjxhsavyv.vercel.app/',  // Allow your frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',  // Allowable methods
   credentials: true,  // If you need cookies or authentication headers
   preflightContinue: false,
