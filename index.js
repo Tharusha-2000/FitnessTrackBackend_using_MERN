@@ -10,6 +10,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use("/api/user/", UserRoutes);
 
+
 // error handler
 app.use((err, req, res, next) => {
   const status = err.status || 500;
@@ -44,7 +45,7 @@ const startServer = async () => {
   try {
     connectDB();
     app.listen(8002, () => console.log("Server started on port 8110"));
-    
+
   } catch (error) {
     console.log(error);
   }
