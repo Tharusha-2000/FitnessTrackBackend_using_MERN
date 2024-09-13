@@ -51,7 +51,7 @@ const connectDB = () => {
 const startServer = async () => {
   try {
     connectDB();
-    const PORT = process.env.PORT || 8003; // Dynamic port
+    const PORT = process.env.PORT || 8004; // Dynamic port
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   } catch (error) {
     console.error(error);
