@@ -7,7 +7,12 @@ import UserRoutes from "./routes/User.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: "https://fitness-track-frontend-using-mern.vercel.app", // Frontend URL for production
+  credentials: true, // Allow cookies
+};
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true })); // for form data
 
