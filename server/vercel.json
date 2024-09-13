@@ -9,18 +9,18 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/index.js"
+      "dest": "./index.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.js"
+      "dest": "./index.js"
     }
   ],
 
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/server/index.js"
+      "destination": "./index.js"
     }
   ]
 
