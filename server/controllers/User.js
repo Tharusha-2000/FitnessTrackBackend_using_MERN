@@ -1,10 +1,10 @@
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import nodemailer from 'nodemailer';
 import dotenv from "dotenv";
 import { createError } from "../error.js";
 import User from "../models/User.js";
 import Workout from "../models/Workout.js";
+import nodemailer from 'nodemailer';
 
 dotenv.config();
 
@@ -29,14 +29,13 @@ export const UserRegister = async (req, res, next) => {
     });
     const createdUser = await user.save();
     const token = jwt.sign({ id: createdUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "99 years",
+      expiresIn: "9 years",
     });
     return res.status(200).json({ token, user });
   } catch (error) {
     return next(error);
   }
 };
-
 
 export const UserLogin = async (req, res, next) => {
   try {
@@ -53,13 +52,11 @@ export const UserLogin = async (req, res, next) => {
     if (!isPasswordCorrect) {
       return next(createError(403, "Incorrect password"));
     }
-    
+
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "99 years",
+      expiresIn: "9 years",
     });
- 
-    
-    console.log(token);
+
     return res.status(200).json({ token, user });
   } catch (error) {
     return next(error);
@@ -68,9 +65,7 @@ export const UserLogin = async (req, res, next) => {
 
 export const getUserDashboard = async (req, res, next) => {
   try {
-    console.log(req.user);
     const userId = req.user?.id;
-    console.log(userId);
     const user = await User.findById(userId);
     if (!user) {
       return next(createError(404, "User not found"));
@@ -290,7 +285,6 @@ export const addWorkout = async (req, res, next) => {
   }
 };
 
-
 export const contact =async (req, res) => {
   
   try {
@@ -340,9 +334,6 @@ export const contact =async (req, res) => {
 
 
 
-
-
-
 // Function to parse workout details from a line
 const parseWorkoutLine = (parts) => {
   const details = {};
@@ -359,10 +350,7 @@ const parseWorkoutLine = (parts) => {
     return details;
   }
   return null;
-
 };
-
-
 
 // Function to calculate calories burnt for a workout
 const calculateCaloriesBurnt = (workoutDetails) => {
@@ -371,7 +359,3 @@ const calculateCaloriesBurnt = (workoutDetails) => {
   const caloriesBurntPerMinute = 5; // Sample value, actual calculation may vary
   return durationInMinutes * caloriesBurntPerMinute * weightInKg;
 };
-
-
-
-
