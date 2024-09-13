@@ -1,8 +1,9 @@
 import express from "express";
-import * as dotenv from "dotenv";
+import  dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./routes/User.js";
+
 dotenv.config();
 const app = express();
 app.use(cors());
@@ -38,7 +39,7 @@ const connectDB = () => {
 const startServer = async () => {
   try {
     connectDB();
-    app.listen(8002, () => console.log("Server started on port 8110"));
+    app.listen(8002, () => console.log("Server started on port 8002"));
 
   } catch (error) {
     console.log(error);
