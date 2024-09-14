@@ -9,7 +9,6 @@ require('dotenv').config();
 dotenv.config();
 
 const app = express();
-// CORS configuration
 
 app.use(cors());
 app.set('view engine', 'ejs');
