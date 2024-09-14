@@ -41,7 +41,7 @@ app.get("/", async (req, res) => {
   })
 }); 
 
-var mongoURL = 'mongodb+srv://dinukgunasekara286:Bzt3SrJYtm5htN4H@fitnessdb.w1xusgy.mongodb.net/'
+var mongoURL = 'mongodb+srv://IMS:IMS123@imsdb.af3d7jt.mongodb.net/'
 
 const connectDB = () => {
   mongoose.set("strictQuery", true);
