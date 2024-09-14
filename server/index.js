@@ -52,7 +52,7 @@ const connectDB = () => {
 const startServer = async () => {
   try {
     connectDB();
-    const PORT = 8005; // Dynamic port
+    const PORT = 8050; // Dynamic port
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));  
     } catch (error) {
     console.error(error);
