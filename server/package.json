@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "build": "npm install",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,16 +13,16 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.3",
+    "morgan": "^1.10.0",
     "nodemailer": "^6.9.15",
-    "nodemon": "^3.1.0"
-  },
-  "engines": {
-    "node": "16.x" 
+    "nodemon": "^3.1.0",
+    "path": "^0.12.7",
+    "run": "^1.5.0"
   }
-  
 }

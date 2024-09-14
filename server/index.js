@@ -3,6 +3,8 @@ import * as dotenv from "dotenv";
 import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./routes/User.js";
+import morgan from "morgan";
+import body from "body-parser";
 
 
 dotenv.config();
@@ -16,8 +18,12 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true })); // for form data
+app.use(morgan('tiny'));
 
 app.use("/api/user/", UserRoutes);
+app.use(express.static('Public'))
+app.use(body.json());
+
 // error handler
 app.use((err, req, res, next) => {
   const status = err.status || 500;
@@ -51,7 +57,7 @@ const connectDB = () => {
 const startServer = async () => {
   try {
     connectDB();
-    const PORT = process.env.PORT || 8004; // Dynamic port
+    const PORT = process.env.PORT || 8005; // Dynamic port
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   } catch (error) {
     console.error(error);
