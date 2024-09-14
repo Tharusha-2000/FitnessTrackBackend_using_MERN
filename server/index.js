@@ -37,8 +37,8 @@ app.use((err, req, res, next) => {
 app.get("/", async (req, res) => {
   res.status(200).json({
     message: "Hello developers",
-  });
-});
+  })
+}); 
 
 var mongoURL = 'mongodb+srv://dinukgunasekara286:Bzt3SrJYtm5htN4H@fitnessdb.w1xusgy.mongodb.net/'
 
