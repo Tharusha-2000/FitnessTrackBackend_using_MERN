@@ -4,7 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const UserRoutes = require("./routes/User");
 const morgan = require("morgan");
-
+require('dotenv').config();
 
 dotenv.config();
 
@@ -58,12 +58,10 @@ const startServer = async () => {
   try {
     connectDB();
     const PORT = process.env.PORT || 8005; // Dynamic port
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-
-    
-  } catch (error) {
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));  
+    } catch (error) {
     console.error(error);
-  }
+    }
 };
 
 startServer();
