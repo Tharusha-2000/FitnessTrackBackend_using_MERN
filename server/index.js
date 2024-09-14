@@ -15,7 +15,7 @@ const corsOptions = {
   methods: ['GET','POST','PUT',"DELETE"],
   credentials: true, // Allow cookies
 };
-app.use(cors(corsOptions));
+app.use(cors());
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
