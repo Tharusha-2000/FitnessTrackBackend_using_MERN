@@ -12,6 +12,7 @@ const app = express();
 // CORS configuration
 const corsOptions = {
   origin: "https://fitness-track-frontend-using-mern.vercel.app", // Frontend URL for production
+  methods: ['GET','POST','PUT',"DELETE"],
   credentials: true, // Allow cookies
 };
 app.use(cors(corsOptions));
