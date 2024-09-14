@@ -4,7 +4,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import UserRoutes from "./routes/User.js";
 import morgan from "morgan";
-import body from "body-parser";
 
 
 dotenv.config();
@@ -17,13 +16,12 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.set('view engine', 'ejs');
-app.use(express.json({ limit: "50mb" }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use(morgan('tiny'));
 
 app.use("/api/user/", UserRoutes);
 app.use(express.static('Public'))
-app.use(body.json());
 
 // error handler
 app.use((err, req, res, next) => {
@@ -38,7 +36,7 @@ app.use((err, req, res, next) => {
 
 app.get("/", async (req, res) => {
   res.status(200).json({
-    message: "Hello developers from GFG",
+    message: "Hello developers",
   });
 });
 
