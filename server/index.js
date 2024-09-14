@@ -16,6 +16,7 @@ const corsOptions = {
   credentials: true, // Allow cookies
 };
 app.use(cors(corsOptions));
+app.set('view engine', 'ejs');
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true })); // for form data
 app.use(morgan('tiny'));
