@@ -1,14 +1,14 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-import { createError } from "../error.js";
-import User from "../models/User.js";
-import Workout from "../models/Workout.js";
-import nodemailer from 'nodemailer';
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+const {createError} = require("../error.js");
+const User = require("../models/User.js");
+const Workout = require("../models/Workout.js");
+const nodemailer = require('nodemailer');
 
 dotenv.config();
 
-export const UserRegister = async (req, res, next) => {
+exports.UserRegister = async (req, res, next) => {
   try {
     const { email, password, name, img } = req.body;
 
@@ -37,7 +37,7 @@ export const UserRegister = async (req, res, next) => {
   }
 };
 
-export const UserLogin = async (req, res, next) => {
+exports.UserLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -63,7 +63,7 @@ export const UserLogin = async (req, res, next) => {
   }
 };
 
-export const getUserDashboard = async (req, res, next) => {
+exports.getUserDashboard = async (req, res, next) => {
   try {
     const userId = req.user?.id;
     const user = await User.findById(userId);
@@ -185,7 +185,7 @@ export const getUserDashboard = async (req, res, next) => {
   }
 };
 
-export const getWorkoutsByDate = async (req, res, next) => {
+exports.getWorkoutsByDate = async (req, res, next) => {
   try {
     const userId = req.user?.id;
     const user = await User.findById(userId);
@@ -219,7 +219,7 @@ export const getWorkoutsByDate = async (req, res, next) => {
   }
 };
 
-export const addWorkout = async (req, res, next) => {
+exports.addWorkout = async (req, res, next) => {
   try {
     const userId = req.user?.id;
     const { workoutString } = req.body;
@@ -285,7 +285,7 @@ export const addWorkout = async (req, res, next) => {
   }
 };
 
-export const contact =async (req, res) => {
+exports.contact =async (req, res) => {
   
   try {
     console.log(req.user);

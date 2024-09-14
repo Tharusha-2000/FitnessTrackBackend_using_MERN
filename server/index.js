@@ -1,9 +1,9 @@
-import express from "express";
-import  dotenv from "dotenv";
-import cors from "cors";
-import mongoose from "mongoose";
-import UserRoutes from "./routes/User.js";
-import morgan from "morgan";
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const UserRoutes = require("./routes/User");
+const morgan = require("morgan");
 
 
 dotenv.config();
@@ -58,9 +58,13 @@ const startServer = async () => {
     connectDB();
     const PORT = process.env.PORT || 8005; // Dynamic port
     app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+
+    
   } catch (error) {
     console.error(error);
   }
 };
 
 startServer();
+
+module.exports = app; 

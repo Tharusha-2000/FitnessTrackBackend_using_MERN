@@ -1,21 +1,16 @@
-import express from "express";
-import {
-  UserLogin,
-  UserRegister,
-  addWorkout,
-  getUserDashboard,
-  getWorkoutsByDate,
-  contact,
-} from "../controllers/User.js";
-import { verifyToken } from "../middleware/verifyToken.js";
+const express = require("express");
+const userController = require("../controllers/User.js");
+const m = require("../middleware/verifyToken.js");
+
 
 const router = express.Router();
 
-router.post("/signup", UserRegister);
-router.post("/signin", UserLogin);
+router.post("/signup", userController.UserRegister);
+router.post("/signin", userController.UserLogin);
 
-router.get("/dashboard", verifyToken, getUserDashboard);
-router.get("/workout", verifyToken, getWorkoutsByDate);
-router.post("/workout", verifyToken, addWorkout);
-router.post("/contact", verifyToken, contact);
-export default router;
+router.get("/dashboard", m.verifyToken, userController.getUserDashboard);
+router.get("/workout", m.verifyToken, userController.getWorkoutsByDate);
+router.post("/workout", m.verifyToken, userController.addWorkout);
+router.post("/contact", m.verifyToken, userController.contact);
+
+module.exports = router;
