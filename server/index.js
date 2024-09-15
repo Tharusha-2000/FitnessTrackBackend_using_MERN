@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 const corsOptions = {
-  origin: "https://fitness-track-frontend-using-mern-heeeeeeeeeee.vercel.app", // Frontend URL for production
+  origin: "http://localhost:5173", // Frontend URL for production
   methods: ['GET','POST','PUT',"DELETE"],
   credentials: true, // Allow cookies
 };
