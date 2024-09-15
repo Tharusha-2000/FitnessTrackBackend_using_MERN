@@ -9,8 +9,12 @@ require('dotenv').config();
 dotenv.config();
 
 const app = express();
-
-app.use(cors());
+const corsOptions = {
+  origin: "https://fitness-track-frontend-using-mern-heeeeeeeeeee.vercel.app", // Frontend URL for production
+  methods: ['GET','POST','PUT',"DELETE"],
+  credentials: true, // Allow cookies
+};
+app.use(cors(corsOptions));
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
